@@ -5,12 +5,14 @@ import { scanLibrary } from "../src/services/library";
 import { getSongs, Song, initDatabase } from "../src/db";
 import { SongListItem } from "../src/components/SongListItem";
 import { useAudioStore } from "../src/services/audio";
-import { LucideRefreshCw } from "lucide-react-native";
+import { LucideRefreshCw, LucideMusic, LucidePlay, LucidePause } from "lucide-react-native";
+import { PlayerModal } from "../src/components/PlayerModal";
 
 export default function Library() {
     const [songs, setSongs] = useState<Song[]>([]);
     const [loading, setLoading] = useState(false);
-    const { playSong, currentSong, setupAudio } = useAudioStore();
+    const [playerVisible, setPlayerVisible] = useState(false);
+    const { playSong, currentSong, isPlaying, setupAudio } = useAudioStore();
 
     const loadSongs = async () => {
         setLoading(true);
@@ -76,6 +78,26 @@ export default function Library() {
                     }
                 />
             )}
+            <View className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 py-3 flex-row items-center justify-between shadow-lg" style={{ paddingBottom: 24 }}>
+                {currentSong && (
+                    <TouchableOpacity onPress={() => setPlayerVisible(true)} className="flex-1 flex-row items-center">
+                        <View className="w-10 h-10 bg-gray-100 rounded mr-3 items-center justify-center">
+                            <LucideMusic size={20} color="#6366f1" />
+                        </View>
+                        <View>
+                            <Text numberOfLines={1} className="font-semibold text-gray-900">{currentSong.title || currentSong.filename}</Text>
+                            <Text numberOfLines={1} className="text-xs text-gray-500">{currentSong.artist || 'Unknown'}</Text>
+                        </View>
+                    </TouchableOpacity>
+                )}
+                {currentSong && (
+                    <TouchableOpacity onPress={isPlaying ? useAudioStore.getState().pause : useAudioStore.getState().resume} className="p-2">
+                        {isPlaying ? <LucidePause size={24} color="#1f2937" /> : <LucidePlay size={24} color="#1f2937" />}
+                    </TouchableOpacity>
+                )}
+            </View>
+
+            <PlayerModal visible={playerVisible} onClose={() => setPlayerVisible(false)} />
         </SafeAreaView>
     );
 }
