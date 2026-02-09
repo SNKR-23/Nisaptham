@@ -62,6 +62,10 @@ export default function Library() {
                             song={item}
                             isActive={currentSong?.id === item.id}
                             onPress={() => playSong(item, songs)}
+                            onQueue={() => {
+                                useAudioStore.getState().addToQueue(item);
+                                // Optional: Show toast
+                            }}
                         />
                     )}
                     ListEmptyComponent={

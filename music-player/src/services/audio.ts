@@ -13,6 +13,7 @@ interface AudioState {
     resume: () => Promise<void>;
     next: () => Promise<void>;
     prev: () => Promise<void>;
+    addToQueue: (song: Song) => void;
     setupAudio: () => Promise<void>;
 }
 
@@ -108,5 +109,11 @@ export const useAudioStore = create<AudioState>((set, get) => ({
             const { sound } = get();
             if (sound) await sound.replayAsync();
         }
+    },
+
+    addToQueue: (song: Song) => {
+        const { queue } = get();
+        // Avoid duplicates if desired, or allow them. tailored for "Queue" usually means append.
+        set({ queue: [...queue, song] });
     },
 }));
