@@ -2,6 +2,7 @@
   "expo": {
     "name": "Nisaptham",
     "slug": "nisaptham",
+    "description": "Nisaptham is a minimalist, soul-focused music player designed for those who seek more than just sound. In a world filled with noise, Nisaptham provides a sanctuary—a bridge between the chaotic reality of daily life and the deep, heavenly peace found within the truth of humanity.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
