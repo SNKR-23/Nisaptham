@@ -46,7 +46,6 @@ export default function Library() {
             <View className="flex-row items-center justify-between px-4 py-4 border-b border-gray-100">
                 <Text className="text-2xl font-bold text-gray-900">Nisaptham</Text>
                 <TouchableOpacity onPress={handleScan} disabled={loading}>
-                    {/* @ts-expect-error - Lucide icons accept color prop at runtime */}
                     <LucideRefreshCw size={24} color="#374151" className={loading ? "opacity-50" : ""} />
                 </TouchableOpacity>
             </View>
@@ -83,7 +82,6 @@ export default function Library() {
                 {currentSong && (
                     <TouchableOpacity onPress={() => setPlayerVisible(true)} className="flex-1 flex-row items-center">
                         <View className="w-10 h-10 bg-gray-100 rounded mr-3 items-center justify-center">
-                            {/* @ts-expect-error - Lucide icons accept color prop at runtime */}
                             <LucideMusic size={20} color="#6366f1" />
                         </View>
                         <View>
@@ -94,7 +92,6 @@ export default function Library() {
                 )}
                 {currentSong && (
                     <TouchableOpacity onPress={isPlaying ? useAudioStore.getState().pause : useAudioStore.getState().resume} className="p-2">
-                        {/* @ts-expect-error - Lucide icons accept color prop at runtime */}
                         {isPlaying ? <LucidePause size={24} color="#1f2937" /> : <LucidePlay size={24} color="#1f2937" />}
                     </TouchableOpacity>
                 )}

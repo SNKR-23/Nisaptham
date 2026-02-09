@@ -24,7 +24,6 @@ export const SongListItem = ({ song, onPress, onQueue, isActive }: Props) => {
         return (
             <View className="bg-indigo-500 justify-center items-start px-6 flex-1">
                 <Animated.View style={{ transform: [{ scale }] }} className="flex-row items-center">
-                    {/* @ts-expect-error - Lucide icons accept color prop at runtime */}
                     <LucideListPlus color="white" size={24} />
                     <Text className="text-white font-bold ml-2">Add to Queue</Text>
                 </Animated.View>
@@ -47,7 +46,6 @@ export const SongListItem = ({ song, onPress, onQueue, isActive }: Props) => {
                 className={`flex-row items-center p-4 border-b border-gray-100 ${isActive ? 'bg-gray-50' : 'bg-white'}`}
             >
                 <View className={`w-12 h-12 rounded-lg items-center justify-center mr-4 ${isActive ? 'bg-indigo-100' : 'bg-gray-100'}`}>
-                    {/* @ts-expect-error - Lucide icons accept color prop at runtime */}
                     <LucideMusic size={24} color={isActive ? '#6366f1' : '#9ca3af'} />
                 </View>
 
