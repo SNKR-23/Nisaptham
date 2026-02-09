@@ -37,10 +37,10 @@ export const addSong = (song: Song) => {
         song.filename,
         song.uri,
         song.duration,
-        song.title,
-        song.artist,
-        song.album,
-        song.albumId,
+        song.title ?? null,
+        song.artist ?? null,
+        song.album ?? null,
+        song.albumId ?? null,
         song.id // Check persistence of favorite status
     );
 };

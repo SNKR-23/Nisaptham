@@ -1,12 +1,22 @@
 import * as MediaLibrary from 'expo-media-library';
 import { addSong, Song, initDatabase } from '../db';
+import { Platform } from 'react-native';
 
 export const requestPermissions = async () => {
+    if (Platform.OS === 'web') {
+        console.warn('Media Library is not available on web');
+        return false;
+    }
     const { status } = await MediaLibrary.requestPermissionsAsync();
     return status === 'granted';
 };
 
 export const scanLibrary = async () => {
+    if (Platform.OS === 'web') {
+        console.warn('Media library scanning is not available on web');
+        return;
+    }
+
     const hasPermission = await requestPermissions();
     if (!hasPermission) {
         console.warn('Permission denied for media library');
@@ -58,3 +68,4 @@ export const scanLibrary = async () => {
 
     console.log("Library Scan Complete");
 };
+

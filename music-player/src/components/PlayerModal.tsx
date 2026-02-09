@@ -58,6 +58,7 @@ export const PlayerModal = ({ visible, onClose }: Props) => {
             <View className="flex-1 bg-white items-center justify-center px-8">
                 {/* Header */}
                 <TouchableOpacity onPress={onClose} className="absolute top-12 left-6">
+                    {/* @ts-expect-error - Lucide icons accept color prop at runtime */}
                     <LucideChevronDown size={32} color="#374151" />
                 </TouchableOpacity>
 
@@ -97,6 +98,7 @@ export const PlayerModal = ({ visible, onClose }: Props) => {
                 {/* Controls */}
                 <View className="flex-row items-center justify-between w-64">
                     <TouchableOpacity onPress={prev}>
+                        {/* @ts-expect-error - Lucide icons accept color prop at runtime */}
                         <LucideSkipBack size={32} color="#1f2937" />
                     </TouchableOpacity>
 
@@ -105,13 +107,16 @@ export const PlayerModal = ({ visible, onClose }: Props) => {
                         className="w-20 h-20 bg-indigo-600 rounded-full items-center justify-center shadow-indigo-200 shadow-xl"
                     >
                         {isPlaying ? (
+                            /* @ts-expect-error - Lucide icons accept color/fill props at runtime */
                             <LucidePause size={32} color="white" fill="white" />
                         ) : (
+                            /* @ts-expect-error - Lucide icons accept color/fill props at runtime */
                             <LucidePlay size={32} color="white" fill="white" className="ml-1" />
                         )}
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={next}>
+                        {/* @ts-expect-error - Lucide icons accept color prop at runtime */}
                         <LucideSkipForward size={32} color="#1f2937" />
                     </TouchableOpacity>
                 </View>

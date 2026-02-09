@@ -1,6 +1,7 @@
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from 'expo-av';
 import { Song } from '../db';
 import { create } from 'zustand';
+import { Platform } from 'react-native';
 
 interface AudioState {
     currentSong: Song | null;
@@ -25,6 +26,10 @@ export const useAudioStore = create<AudioState>((set, get) => ({
     currentIndex: -1,
 
     setupAudio: async () => {
+        if (Platform.OS === 'web') {
+            console.warn('Audio setup is not available on web');
+            return;
+        }
         try {
             await Audio.setAudioModeAsync({
                 allowsRecordingIOS: false,
@@ -40,6 +45,20 @@ export const useAudioStore = create<AudioState>((set, get) => ({
     },
 
     playSong: async (song: Song, newQueue?: Song[]) => {
+        if (Platform.OS === 'web') {
+            console.warn('Audio playback is not available on web');
+            // Still update state to show the song, just can't play it
+            const activeQueue = newQueue || get().queue;
+            const index = activeQueue.findIndex(s => s.id === song.id);
+            set({
+                currentSong: song,
+                isPlaying: false,
+                queue: activeQueue,
+                currentIndex: index,
+            });
+            return;
+        }
+
         const { sound, queue } = get();
 
         // Unload previous sound
